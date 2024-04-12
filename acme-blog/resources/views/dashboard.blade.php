@@ -18,8 +18,12 @@
 
                             @if ($blog->user_id == $user_id)
                             <div class="flex">
-                                <a href="/delete-blog?{{$blog->id}}" class="mt-9 bg-red-500 p-1.5 ml-2 rounded:md w-[100px]">Delete</a>
-                               <a href="/edit-blog?{{$blog->id}}" class="mt-9 bg-green-500 p-1.5 ml-2 rounded:md w-[100px]">Edit</a>
+                                <form action="/delete-blog/{{$blog->id}}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="mt-9 bg-red-500 p-1.5 ml-2 rounded:md w-[100px]">Delete</button>
+                                </form>
+                               <a href="/edit-blog/{{$blog->id}}" class="text-center mt-9 bg-green-500 p-1.5 ml-2 rounded:md w-[100px]">Edit</a>
                             </div>
                                
                             @else

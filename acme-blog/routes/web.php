@@ -33,8 +33,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/edit-blog/{id}', [BlogController::class, 'edit'])->name('blog.edit');//render edit view
     Route::put('/update-blog/{id}', [BlogController::class, 'update'])->name('blog.update');
-    
-    Route::delete('/delete-blog/{id}', [BlogController::class, 'delete'])->name('blog.delete');
+
+    Route::delete('/delete-blog/{id}', [BlogController::class, 'destroy'])->name('blog.delete');
 
     Route::get('/dashboard', [BlogController::class, 'index'])->name('dashboard');
 });

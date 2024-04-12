@@ -17,6 +17,19 @@
         </div>
 
         <!-- Password -->
+
+        <div class="mt-4">
+            <x-input-label for="birth_date" :value="__('Date of Birth')" />
+
+            <x-text-input id="birth_date" class="block mt-1 w-full"
+                            type="date"
+                            name="birth_date"
+                            required autocomplete="new-date" />
+
+            <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
+        </div>
+
+        <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 

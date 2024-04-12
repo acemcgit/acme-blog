@@ -34,9 +34,9 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "title" => "required",
-            "description" => "required",
-            "content" => "required",
+            "title" => "required|min:3|max:15",
+            "description" => "required|min:3|max:30",
+            "content" => "required|min:10|max:1000",
         ]);
 
         try {
@@ -67,9 +67,10 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        
+        $blog = Blog::findOrFail($id);
+        return view('blog.edit-blog', ['blog'=>$blog]);
     }
 
     /**
@@ -78,13 +79,13 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            "title" => "required",
-            "description" => "required",
-            "content" => "required",
+            "title" => "required|min:3|max:15",
+            "description" => "required|min:3|max:30",
+            "content" => "required|min:10|max:1000",
         ]);
 
         try {
-            $blog = Blog::find($id);
+            $blog = Blog::findOrFail($id);
 
             $blog->title = $request->input('title');
             $blog->description = $request->input('description');
