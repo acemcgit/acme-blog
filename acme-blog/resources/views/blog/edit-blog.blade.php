@@ -9,9 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 flex items-center justify-center">
-                    <form method="POST" action="/update-blog/{{$blog->id}}" class="flex items-center justify-between flex-col">
-                        @csrf 
-                        @method('PUT')
+                    {{-- <form method="POST" action="/update-blog/{{$blog->id}}" class="flex items-center justify-between flex-col"> --}}
+                    <form method="POST" action="" class="flex items-center justify-between flex-col">
+                        {{-- @csrf 
+                        @method('PUT') --}}
                         <input class="mt-3" type="text" id="title" name="title" placeholder="Title ..." value="{{$blog->title}}">
                         @error('title')
                             <div class="text-red">{{ $message }}</div>
@@ -26,11 +27,13 @@
                         @error('content')
                             <div class="text-red">{{ $message }}</div>
                         @enderror
-                        <button  type="submit" class="mt-3 p-3 text-white bg-blue-600 rounded-md">Submit</button>
+                        <button id="edit-blog" type="submit" class="mt-3 p-3 text-white bg-blue-600 rounded-md">Submit</button>
                     </form>
                     
                 </div>
             </div>
         </div>
     </div>
+
+    @includeWhen(true, 'scripts.edit-blog-script', ['blog' => $blog])
 </x-app-layout>

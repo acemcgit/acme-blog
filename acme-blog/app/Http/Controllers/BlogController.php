@@ -13,7 +13,7 @@ class BlogController extends Controller
     public function index()
     {
         try {
-            $blogs = Blog::with('user')->paginate(10);
+            $blogs = Blog::with('user')->paginate(3);
             return view('dashboard',['blogs'=>$blogs,'user_id'=>auth()->user()->id]);
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -25,7 +25,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('blog.create-blog');
+        return view('blog.create-blog',['header'=>'Create Blog']);
     }
 
     /**
@@ -49,10 +49,10 @@ class BlogController extends Controller
 
             $blog->save();
 
-            return redirect('/dashboard');
+            return response()->json(['success'=>'OK'], 200);
             
         } catch (\Exception $e) {
-           return $e->getMessage();
+            return response()->json(['error'=>$e->getMessage()], 400);
         }
     }
 
@@ -70,7 +70,7 @@ class BlogController extends Controller
     public function edit($id)
     {
         $blog = Blog::findOrFail($id);
-        return view('blog.edit-blog', ['blog'=>$blog]);
+        return view('blog.edit-blog', ['blog'=>$blog,'header'=>'Edit Blog']);
     }
 
     /**
@@ -93,10 +93,12 @@ class BlogController extends Controller
 
             $blog->save();
 
-            return redirect('/dashboard');
+            return response()->json(['success'=>'OK'], 200);
+            //return redirect('/dashboard');
             
         } catch (\Exception $e) {
-           return $e->getMessage();
+            return response()->json(['error'=>$e->getMessage()], 400);
+          // return $e->getMessage();
         }
     }
 
